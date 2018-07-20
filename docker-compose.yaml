@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  gpio:
+    build: .
+    command: python script.py --topic "/rf/#"
+    volumes:
+      - ./gpio.py:/app/script.py
+    devices:
+      - /dev/gpiomem
