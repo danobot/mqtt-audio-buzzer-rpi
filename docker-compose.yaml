@@ -1,10 +1,19 @@
 version: '3.3'
 
 services:
-  gpio:
+  buzz:
     build: .
     command: python script.py --topic "/rf/#"
     volumes:
       - ./gpio.py:/app/script.py
+    devices:
+      - /dev/gpiomem
+  buzz_ha:
+    image: danobot/buzz
+    container_name: buzz_ha
+    environment:
+      MQTT_TOPIC: "/buzz"
+      MQTT_HOST: "10.1.1.130"
+      # GPIO_PIN: 18
     devices:
       - /dev/gpiomem

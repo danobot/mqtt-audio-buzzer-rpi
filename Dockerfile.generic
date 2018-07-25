@@ -6,5 +6,5 @@ RUN pip3 install RPi.GPIO paho-mqtt
 RUN mkdir app
 
 WORKDIR /app
-COPY gpio.py buzz.py
-CMD ["python", "./buzz.py"]
+
+CMD ["python", "./script.py"]
