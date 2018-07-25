@@ -15,5 +15,9 @@ services:
       MQTT_TOPIC: "/buzz"
       MQTT_HOST: "10.1.1.130"
       # GPIO_PIN: 18
+      # BUZZER_REPS: 1
+      # BUZZER_PAUSE: 1
+      # BUZZER_LENGTH: 20
+      # BUZZER_COUNT: 1
     devices:
       - /dev/gpiomem

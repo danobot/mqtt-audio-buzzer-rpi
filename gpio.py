@@ -33,9 +33,9 @@ PIN = os.getenv('GPIO_PIN') if os.getenv('GPIO_PIN') else args.pin
 
 
 default_options.reps = os.getenv('BUZZER_REPS') if os.getenv('BUZZER_REPS') else default_options.reps
-default_options.count = os.getenv('BUZZER_COUNT') if os.getenv('BUZZER_COUNT') else default_options.count
-default_options.length = os.getenv('BUZZER_LENGTH') if os.getenv('BUZZER_LENGTH') else default_options.length
 default_options.pause = os.getenv('BUZZER_PAUSE') if os.getenv('BUZZER_PAUSE') else default_options.pause
+default_options.length = os.getenv('BUZZER_LENGTH') if os.getenv('BUZZER_LENGTH') else default_options.length
+default_options.count = os.getenv('BUZZER_COUNT') if os.getenv('BUZZER_COUNT') else default_options.count
 
 logging.info("Buzzer connected on " + str(PIN))
 logging.info("MQTT Host: " + str(MQTT_HOST))
