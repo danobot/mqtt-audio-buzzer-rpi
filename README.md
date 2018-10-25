@@ -49,3 +49,49 @@ MQTT Payload Example format:
 ```
 
 The `pause` value is in seconds, `length` is the duration of the audio tone and measured in milliseconds.
+
+# Home Assistant Integration
+I created scripts that can be triggered in automations to encapsulate these MQTT messages.
+
+```yaml
+buzz_short:
+  alias: Buzz Short
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "/buzz/short"
+
+buzz_long:
+  alias: Buzz Long
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "/buzz/short"
+
+buzz_alarm:
+  alias: Buzz Alarm
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "/buzz/alarm"
+
+buzz_custom:
+  alias: Buzz custom
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "/buzz"
+        payload: >
+          {
+            "reps": 2,
+            "pause": 0.6,
+            "length": 10,
+            "count": 3
+          }
+```
+
+You can call them in automations using:
+
+```yaml
+- service: script.buxx_short
+```
