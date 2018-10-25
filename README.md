@@ -1,6 +1,9 @@
 # Audio Buzzer
 
-Simple Python MQTT Audio Buzzer packaged in a Docker container.
+Simple Python MQTT Audio Buzzer packaged in a Docker container. Image available on Docker Hub as `danobot/buzz`. For use case and more information check out [the associated post on my blog](https://danielha.tk/2018/07/24/python-docker-mqtt-audio-buzzer.html).
+
+## Hardware Requirements
+* Connect a small buzzer-type speaker to a pin on the Raspberry Pi. (Again, [blog post](https://danielha.tk/2018/07/24/python-docker-mqtt-audio-buzzer.html) goes into more detail)
 
 ## Configuration Options
 * Command line parameters to script (for script use)
@@ -10,7 +13,7 @@ Simple Python MQTT Audio Buzzer packaged in a Docker container.
 
 See gpio.py for command line options to override default values.
 
-## Docker Compose
+## Getting started
 Add the following entry to your docker compose file. Uncomment and overwride the environment variables as necessary. These will be used as defaults.
 
 ```
@@ -28,6 +31,9 @@ buzz:
   devices:
     - /dev/gpiomem
 ```
+
+### Cloning the repository
+You may clone the repository and bulid the image yourself for your particular architecture. 
 
 ## Features
 
