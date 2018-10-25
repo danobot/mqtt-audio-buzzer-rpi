@@ -11,6 +11,7 @@ services:
   buzz_ha:
     image: danobot/buzz
     container_name: buzz_ha
+    restart: always
     environment:
       MQTT_TOPIC: "/buzz"
       MQTT_HOST: "ubuntu"
