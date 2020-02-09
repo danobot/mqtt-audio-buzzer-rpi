@@ -32,6 +32,10 @@ buzz:
     - /dev/gpiomem
 ```
 
+Or docker run:
+```
+docker run --restart=unless-stopped --device=/dev/gpiomem --name buzz -d -e MQTT_HOST="tower" -e MQTT_TOPIC="/buzz"  danobot/buzz
+```
 ### Cloning the repository
 You may clone the repository and bulid the image yourself for your particular architecture. 
 
