@@ -60,6 +60,8 @@ MQTT Payload Example format:
 
 The `pause` value is in seconds, `length` is the duration of the audio tone and measured in milliseconds.
 
+Test Endpoint
+Publishing a message on `/buzzer/test` will return the payload on `/buzzer/result`. This is useful for status testing.
 # Home Assistant Integration
 I created scripts that can be triggered in automations to encapsulate these MQTT messages.
 

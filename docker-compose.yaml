@@ -9,12 +9,12 @@ services:
     devices:
       - /dev/gpiomem
   buzz_ha:
-    image: danobot/buzz
+    image: danobot/buzz:latest
     container_name: buzz_ha
     restart: always
     environment:
       MQTT_TOPIC: "/buzz"
-      MQTT_HOST: "ubuntu"
+      MQTT_HOST: "tower.local"
       # GPIO_PIN: 18
       # BUZZER_REPS: 1
       # BUZZER_PAUSE: 1

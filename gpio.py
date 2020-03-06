@@ -21,7 +21,7 @@ parser.add_argument('-p', dest="pause",     type=int,   default=5,            he
 parser.add_argument('-d', dest="length",     type=int,   default=5,          help="Buzz Length")
 parser.add_argument('-c', dest="count",type=int,default=1, help="Buzzer Count (per repetition)")
 parser.add_argument('--topic', dest="mqtt_topic",type=str,default='-', help="MQTT Topic to Listen to (Default: '#')")
-parser.add_argument('--host', dest="mqtt_host",type=str,default='10.1.1.130', help="MQTT Host (Default: '10.1.1.130')")
+parser.add_argument('--host', dest="mqtt_host",type=str,default='tower', help="MQTT Host (Default: '10.1.1.130')")
 # parser.add_argument('--env', dest="env",default=False,const=True , action='store_const',help="Whether the script is configured using environment variables")
 
 args = parser.parse_args()
@@ -29,6 +29,7 @@ default_options = args
 
 MQTT_HOST = os.getenv('MQTT_HOST') if os.getenv('MQTT_HOST') else args.mqtt_host
 MQTT_TOPIC = os.getenv('MQTT_TOPIC') if os.getenv('MQTT_TOPIC') else args.mqtt_topic
+MQTT_TOPIC = os.getenv('MQTT_TEST_TOPIC') if os.getenv('MQTT_TEST_TOPIC') else "/buzzer/test"
 PIN = os.getenv('GPIO_PIN') if os.getenv('GPIO_PIN') else args.pin
 
 
@@ -40,6 +41,7 @@ default_options.count = os.getenv('BUZZER_COUNT') if os.getenv('BUZZER_COUNT') e
 logging.info("Buzzer connected on " + str(PIN))
 logging.info("MQTT Host: " + str(MQTT_HOST))
 logging.info("MQTT Topic: " + str(MQTT_TOPIC))
+logging.info("MQTT Test Topic: " + str(MQTT_TEST_TOPIC))
 
 client = mqtt.Client()
 
@@ -59,13 +61,16 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(MQTT_TOPIC+"/short")
     client.subscribe(MQTT_TOPIC+"/long")
     client.subscribe(MQTT_TOPIC+"/alarm")
+    client.subscribe(MQTT_TEST_TOPIC)
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     topic = msg.topic
     split = topic.split("/")
     a = split[-1]
-
+    if topic == MQTT_TEST_TOPIC:
+        client.publish("/buzzer/result", payload=msg.payload, qos=0, retain=False)
+        return
     if a == 'short':
         preset_short(client, userdata, msg)
     elif a == 'long':
